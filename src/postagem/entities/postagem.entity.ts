@@ -1,5 +1,6 @@
 import { IsNotEmpty } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Tema } from "../../tema/entities/tema.entity";
 
 @Entity({name: "tb_postagens"}) // Indica que a classe é uma entidade e o nome será "tb_postagens"
 export class Postagem {
@@ -16,4 +17,10 @@ export class Postagem {
 
     @UpdateDateColumn()
     data: Date;
+
+    @ManyToOne(() => Tema, (tema) => tema.postagem, { // Define um relacionamento MUITOS para UM (ManyToOne)
+
+        onDelete: "CASCADE"  // Garante que ao deletar um Tema, todas as Postagens associadas a ele sejam removidas automaticamente
+    })
+    tema: Tema // Cria o atributo "tema" na entidade atual onde sera criada uma chave estrangeira (FK) no banco de dados
 }
