@@ -6,6 +6,9 @@ import { TemaService } from "../../tema/services/tema.service";
 
 @Injectable()
 export class PostagemService {
+    findByTitulo(titulo: string): Promise<Postagem[]> {
+        throw new Error("Method not implemented.");
+    }
     constructor(
         @InjectRepository(Postagem)
         private postagemRepository: Repository<Postagem>,
